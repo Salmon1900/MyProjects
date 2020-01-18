@@ -1,0 +1,11 @@
+rng('shuffle');
+load('FinalHistData.mat');
+net = patternnet(20);
+net.inputs{1}.processFcns = {};
+net.trainParam.showWindow = 0;
+net.divideFcn = 'divideind';
+[TrainInd, ValInd, TestInd]=GetIndices(220,4);
+net.divideParam.trainInd = TrainInd;
+net.divideParam.valInd = ValInd;
+net.divideParam.testInd = TestInd;
+[net tr] = train(net, PH, tH);
